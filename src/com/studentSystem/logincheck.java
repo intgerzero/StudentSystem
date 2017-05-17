@@ -13,17 +13,21 @@ import javax.websocket.Session;
 
 import java.sql.*;
 
-/**
- * Servlet implementation class logincheck
- */
-@WebServlet("/logincheck")
+
+// Servlet implementation class logincheck
+//@WebServlet("/logincheck")
 public class logincheck extends HttpServlet {
+	//private static final long serialVersionUID = 1L;
+
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see Servlet#init(ServletConfig)
 	 */
-	public void init(ServletConfig config) throws ServletException {
+	public void init() throws ServletException {
 		// TODO Auto-generated method stub
 	}
 
@@ -32,19 +36,26 @@ public class logincheck extends HttpServlet {
 	 */
 	public void destroy() {
 		// TODO Auto-generated method stub
+		super.destroy();
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub	
 		try {
-			String DBurl="";
-			String DBuser="";
-			String DBpassword="";
+			String DBurl="jdbc:mysql://localhost/StudentSystem";
+			String DBuser="root";
+			String DBpassword="intger_zero087";
 			//加载数据库驱动
-			Class.forName("com.mysql.jdbc.Driver");
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+			} catch (ClassNotFoundException e) {
+				// TODO: handle exception
+				System.out.println("加载数据库驱动异常");
+				e.printStackTrace();
+			}
 			//建立连接
 			Connection connection=DriverManager.getConnection(DBurl, DBuser, DBpassword);
 			
@@ -69,7 +80,7 @@ public class logincheck extends HttpServlet {
 			else 
             {
             	session.setAttribute("message","用户名不存在或您选择的身份错误");
-            	request.getRequestDispatcher("/Login.jsp").forward(request, response);	
+            	request.getRequestDispatcher("/login.jsp").forward(request, response);	
             }
 			rs.close();
 			ps.close();

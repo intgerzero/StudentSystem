@@ -12,7 +12,7 @@
   
   <servlet>
   	<servlet-name>logincheck</servlet-name>
-  	<servlet-class>com.studentStytem.logincheck</servlet-class>
+  	<servlet-class>com.studentSystem.logincheck</servlet-class>
   </servlet>
   
   <servlet-mapping>
