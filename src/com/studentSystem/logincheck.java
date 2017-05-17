@@ -79,7 +79,8 @@ public class logincheck extends HttpServlet {
 			}
 			else 
             {
-            	session.setAttribute("message","用户名不存在或您选择的身份错误");
+            	session.setAttribute("message","用户名不存在或密码错误");
+            //	request.getRequestDispatcher("/login.jsp");
             	request.getRequestDispatcher("/login.jsp").forward(request, response);	
             }
 			rs.close();

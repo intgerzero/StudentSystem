@@ -22,22 +22,22 @@ session.removeAttribute("message");
     }
    	#myForm {
 	   width:400px;
-	   height:300px;
+	   height:200px;
 	   position:absolute;
-	   top:30%;
+	   top:40%;
 	   left:50%;
 	   margin:-150px 0 0 -200px;
 	   background:#FFF;
 	   border:3px solid #999;
-	    border-radius:10px;
+	   border-radius:10px;
       }
      #main
    	{
-   	   height:95%;
+   	   height:90%;
    	}
    	#footer
    	{
-   	   height:5%;
+   	   height:10%;
    	}
 </style>
 </head>
@@ -57,8 +57,10 @@ session.removeAttribute("message");
 					<td><input type="password" name="UserPWD" size="20"></td>
 				</tr>
 				
+				<tr>&nbsp;</tr>
+				
 				<tr>
-					<td><input type="submit" value="提交" onClick="return check();"></td>
+					<td><input type="submit" value="提交" ></td>
 					<td><input type="reset" value="重置"></td>
 				</tr>
 			</table>
