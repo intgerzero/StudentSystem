@@ -9,14 +9,23 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
   <servlet>
-  	<servlet-name>logincheck</servlet-name>
-  	<servlet-class>com.studentSystem.logincheck</servlet-class>
+    <servlet-name>logincheck</servlet-name>
+    <servlet-class>com.studentSystem.logincheck</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>searchStudentInfo</servlet-name>
+  	<servlet-class>com.studentSystem.searchStudentInfo</servlet-class>
   </servlet>
   
+  
+  
   <servlet-mapping>
-  	<servlet-name>logincheck</servlet-name>
-  	<url-pattern>/logincheck</url-pattern>
+    <servlet-name>logincheck</servlet-name>
+    <url-pattern>/logincheck</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>searchStudentInfo</servlet-name>
+  	<url-pattern>/searchStudentInfo</url-pattern>
   </servlet-mapping>
 </web-app>

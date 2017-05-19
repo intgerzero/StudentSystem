@@ -68,7 +68,7 @@ public class logincheck extends HttpServlet {
 			session.setAttribute("userpwd", password);
 			
 			//查询数据库中userinfo表查看是否有该用户
-			PreparedStatement ps=connection.prepareStatement("SELECT * FROM UserInfo WHERE Name=? AND Password=?");
+			PreparedStatement ps=connection.prepareStatement("SELECT * FROM UserInfo WHERE StudentNo=? AND Password=?");
 			ps.setString(1, username);
 			ps.setString(2, password);
 			ResultSet rs=ps.executeQuery();

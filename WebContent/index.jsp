@@ -1,8 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%!
-   String username;
-%>
 <%
+   String username;
    username=(String)session.getAttribute("userid");
 %>
 <html>
@@ -39,9 +37,9 @@
         <div id="menu">
 	        <h2>Welcome to Student System!</h2>
 	         <a href="index.jsp" >首页</a>
-	         <a href="StudentInfo.jsp" target="show" ><span>个人信息</span></a>
-	         <a href="CourseInfo.jsp" target="show"><span>选课查询 </span></a>
-	         <a href="GradeInfo.jsp" target="show"><span>成绩查询 </span></a>
+	         <a href="StudentInfo.jsp?StudentNo=<%=username%>" target="show" ><span>个人信息</span></a>
+	         <a href="CourseInfo.jsp?StudentNo=<%=username%>" target="show"><span>选课查询 </span></a>
+	         <a href="GradeInfo.jsp?StudentNo=<%=username%>" target="show"><span>成绩查询 </span></a>
 	    </div>
     </div>
     
