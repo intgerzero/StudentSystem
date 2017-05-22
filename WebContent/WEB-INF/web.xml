@@ -14,10 +14,13 @@
     <servlet-class>com.studentSystem.logincheck</servlet-class>
   </servlet>
   <servlet>
-  	<servlet-name>searchStudentInfo</servlet-name>
-  	<servlet-class>com.studentSystem.searchStudentInfo</servlet-class>
+    <servlet-name>searchStudentInfo</servlet-name>
+    <servlet-class>com.studentSystem.searchStudentInfo</servlet-class>
   </servlet>
-  
+  <servlet>
+  	<servlet-name>searchCourse</servlet-name>
+  	<servlet-class>com.studentSystem.searchCourse</servlet-class>
+  </servlet>
   
   
   <servlet-mapping>
@@ -25,7 +28,11 @@
     <url-pattern>/logincheck</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-  	<servlet-name>searchStudentInfo</servlet-name>
-  	<url-pattern>/searchStudentInfo</url-pattern>
+    <servlet-name>searchStudentInfo</servlet-name>
+    <url-pattern>/searchStudentInfo</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>searchCourse</servlet-name>
+  	<url-pattern>/searchCourse</url-pattern>
   </servlet-mapping>
 </web-app>

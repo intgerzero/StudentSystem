@@ -2,10 +2,8 @@
 <%@ page language="java" import="java.util.*,java.sql.*,javax.sql.*,javax.naming.*,javax.servlet.http.HttpSession" pageEncoding="UTF-8"%>
 <%
 String StudentNo;
+String Photo=null;
 StudentNo=request.getParameter("StudentNo");
-%>
-<%! 
-String Photo;
 %>
 <html>
 <head>
@@ -47,6 +45,10 @@ String Photo;
 	     <div id="content">
 	     	       <h2>&nbsp;&nbsp;&nbsp;个人简历界面</h2> <br>
     <table border=1 >
+     <tr>
+        <td>照片</td>
+        <td><img  id="img"/></td>       
+      </tr>
       <tr>
        	<td>学号：</td>
        <td><input type="text" id="StudentNo" readonly="true"></td>
@@ -80,10 +82,6 @@ String Photo;
        <tr>
        	<td>学院：</td>
         <td><input type="text" id="Academy" readonly="true"></td>
-      </tr>
-      <tr>
-        <td>照片</td>
-        <td><img src=<%=Photo%>></td>
       </tr>
     </table>
 	   	 </div>
@@ -139,7 +137,7 @@ String Photo;
                 var Academy=XMLHttpReq.responseXML.getElementsByTagName("studentacademy");
                 if(StudentNo.length>0&&Name.length>0&&CardNo.length>0&&Prince.length>0)
                 {
-                	
+                   document.getElementById("img").src="./14030110086.png";
                    document.getElementById("StudentNo").value=StudentNo[0].firstChild.data;
                    document.getElementById("Name").value=Name[0].firstChild.data;
                    document.getElementById("CardNo").value=CardNo[0].firstChild.data;
@@ -151,7 +149,7 @@ String Photo;
                    document.getElementById("Email").value=Email[0].firstChild.data;
                    document.getElementById("classnumber").value=ClassNo[0].firstChild.data;
                    document.getElementById("Academy").value=Academy[0].firstChild.data;
-                  
+              
                 }
              }
           }

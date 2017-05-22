@@ -1,4 +1,62 @@
 <%@ page language="java" import="java.util.*,java.sql.*,javax.sql.*,javax.naming.*,com.studentSystem.*" pageEncoding="UTF-8"%>
+
+<%
+      List<Course> Grade=new ArrayList<Course>();
+      List<Course> SearchGrade=new ArrayList<Course>();
+      Connection con=null;
+//      DataSource ds=null;
+//      PreparedStatement ps=null;
+      PreparedStatement ps_grade=null;
+      //读取数据库中数据
+      try {
+  			String DBurl="jdbc:mysql://localhost/StudentSystem";
+  			String DBuser="root";
+  			String DBpassword="intger_zero087";
+  			//加载数据库驱动
+  			try {
+  				Class.forName("com.mysql.jdbc.Driver");
+  			} catch (ClassNotFoundException e) {
+  				// TODO: handle exception
+  				System.out.println("加载数据库驱动异常");
+  				e.printStackTrace();
+  			}
+	//		Context initCtx=new InitialContext();
+	//		Context encCtx=(Context)initCtx.lookup("java:comp/env");
+	//		ds=(DataSource)encCtx.lookup("jdbc/mssql2014");
+			
+			con=DriverManager.getConnection(DBurl, DBuser, DBpassword);
+	//		con=ds.getConnection();
+//			con.setAutoCommit(false);
+//	        session=request.getSession();
+	        String StudentNo;
+			StudentNo=request.getParameter("StudentNo");
+			session.setAttribute("StudentNo", StudentNo);
+	        //	        username=(String)session.getAttribute("userid");  
+			ps_grade=con.prepareStatement("SELECT CourseInfo.CourseNo,CourseInfo.CourseName,CourseInfo.Grade,SC.Result FROM SC,CourseInfo WHERE CourseInfo.CourseNo=SC.CourseNo AND SC.StudentNo=? AND SC.Result!=0");
+			ps_grade.setString(1,StudentNo);
+			ResultSet rs_grade=ps_grade.executeQuery();
+            while (rs_grade.next()) 
+	        {     
+			    Course temp=new Course();
+			    temp.setCourseNo(rs_grade.getString(1));
+			    temp.setCourseName(rs_grade.getString(2));
+			    temp.setGrade(rs_grade.getFloat(3));
+			    temp.setResult(rs_grade.getFloat(4));
+			    Grade.add(temp);       
+			}	
+			rs_grade.close();
+			ps_grade.close();
+			con.close();
+			
+			System.out.println("用户："+StudentNo+"有成绩的课程的大小:"+Grade.size());
+            session.setAttribute("Grade",Grade);
+//            session.setAttribute("SearchGrade",SearchGrade);		
+		} 
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+%>
 <html>
 <head>
    	

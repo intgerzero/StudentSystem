@@ -1,13 +1,11 @@
  <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%!
-   String username;   
+   String StudentNo;   
 %>
 <% 
-   username=(String)session.getAttribute("userid");
+StudentNo=(String)session.getAttribute("StudentNo");
 %>
 <html>
-   <!-- 实现AJAX查询自动补全列表 -->
-   <!-- 页面编码为gb2312，serverlt端位为UTF-8 -->
   <head>
    <link rel="stylesheet" type="text/css" href="style.css">
    <style type="text/css">
@@ -29,13 +27,8 @@
      <tr>
            <td>输入课程名:</td>
            <td>
-            <input type="text" id="names" onkeyup="findNames();">
+            <input type="text" id="names">
             <input type="button" id="search" onclick="searchResult();" value="确 定">
-            <div id="popup">
-              <table id="complete_table" >
-               <tbody id="complete_body" ></tbody>
-              </table>  
-            </div>
            </td>
      </tr>
      <tr>
@@ -70,13 +63,9 @@
   </div>
      <script language="javascript">
         var XMLHttpReq;
-        var completeDiv;
-        var inputField;
-        var completeTable;
-        var completeBody;
         function createXMLHttpRequest()
         {
-            if(window.XMLHttpRequest)
+        	if(window.XMLHttpRequest)
             {
              XMLHttpReq=new XMLHttpRequest();
             }
@@ -94,101 +83,10 @@
                  }
             }
         }
-        
-        function findNames()
-        {
-            inputField=document.getElementById("names");
-            completeTable=document.getElementById("complete_table");
-            completeDiv=document.getElementById("popup");
-            completeBody=document.getElementById("complete_body");
-            if(inputField.value.length>0)
-            {
-               createXMLHttpRequest();
-               var url="autoComplete?action=match&name="+inputField.value;
-               XMLHttpReq.open("GET",url,true);
-               XMLHttpReq.onreadystatechange=processMatchResponse;
-               XMLHttpReq.send(null);
-            }
-            else
-            {
-              clearNames();
-            }
-            
-        }
-        function processMatchResponse()
-        {
-            if(XMLHttpReq.readyState==4)
-            {
-               if(XMLHttpReq.status==200)
-               {
-                  setNames(XMLHttpReq.responseXML.getElementsByTagName("res"));
-               }
-               else
-               { 
-                  windows.alert("请求页面不存在!");
-               }
-            }
-        }
-        function setNames(names)
-        {
-            clearNames();
-            var size=names.length;
-            setOffsets();
-            var row,cell,txtNode;
-            for(var i=0;i<size;i++)
-            {
-               var nextNode=names[i].firstChild.data;
-               row=document.createElement("tr");
-               cell=document.createElement("td");
-               cell.onmouseout=function(){this.className='mouseOn';};
-               cell.onmouseover=function(){this.className='mouseOver';};
-               cell.setAttribute("bgcolor","#FFFAFA");
-               cell.setAttribute("border","0");
-               cell.onclick=function(){completeField(this);};
-               txtNode=document.createTextNode(nextNode);
-               cell.appendChild(txtNode);
-               row.appendChild(cell);
-               completeBody.appendChild(row);
-               
-            }
-        }
-        function setOffsets()
-        {
-             completeTable.style.width=inputField.offsetWidth+"px";
-             var left=calculateOffset(inputField,"offsetLeft");
-             var top=calculateOffset(inputField,"offsetTop")+inputField.offsetHeight;
-             completeDiv.style.border="blcak 1px solid";
-             completeDiv.style.left=left+"px";
-             completeDiv.style.top=top+"px";
-        }
-        function calculateOffset(field,attr)
-        {
-           var offset=0;
-           while(field)
-           {
-              offset+=field[attr];
-              field=field.offsetParent;
-           }
-           return offset;
-        }
-        function completeField(cell)
-        {
-           inputField.value=cell.firstChild.nodeValue;
-           clearNames();         
-        }
-        function clearNames()
-        {
-           var ind=completeBody.childNodes.length;
-           for(var i=ind;i>0;i--)
-           {
-                 completeBody.removeChild(completeBody.childNodes[i-1]);
-           }  
-           completeDiv.style.border="none";
-        }
         function searchResult()
         {
-           createXMLHttpRequest();
-           var url="autoComplete?action=search&name="+inputField.value+"&username="+<%=username%>;
+        	createXMLHttpRequest();
+        	 var url="searchCourse?name="+document.getElementById("names").value+"&StudentNo="+<%=StudentNo%>;
            XMLHttpReq.open("GET",url,true);
            XMLHttpReq.onreadystatechange=processSearchResponse;
            XMLHttpReq.send(null);
